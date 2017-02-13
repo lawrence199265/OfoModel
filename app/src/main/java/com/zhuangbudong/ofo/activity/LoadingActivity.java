@@ -1,7 +1,6 @@
 package com.zhuangbudong.ofo.activity;
 
 import android.content.Intent;
-import android.view.Window;
 
 import com.lawrence.core.lib.core.mvp.BaseActivity;
 import com.zhuangbudong.ofo.R;
@@ -21,8 +20,6 @@ public class LoadingActivity extends BaseActivity<LoadingPresenter> implements I
 
     @Override
     protected int getLayoutId() {
-        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
         return R.layout.activity_loading;
     }
 
@@ -45,5 +42,6 @@ public class LoadingActivity extends BaseActivity<LoadingPresenter> implements I
     public void success() {
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
+        this.finish();
     }
 }

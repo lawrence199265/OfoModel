@@ -8,7 +8,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoadingActivity">
+        <activity
+            android:name=".activity.LoadingActivity"
+            android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -16,15 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.Main2Activity"/>
-        <activity android:name=".activity.SignInActivity">
-        </activity>
-        <activity android:name=".activity.RegisterActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.SignInActivity"/>
+        <activity android:name=".activity.RegisterActivity"/>
     </application>
 
 </manifest>

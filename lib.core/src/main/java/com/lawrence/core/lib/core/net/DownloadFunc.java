@@ -2,6 +2,8 @@ package com.lawrence.core.lib.core.net;
 
 import android.text.TextUtils;
 
+import com.lawrence.core.lib.utils.utils.FileUtil;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,8 +19,8 @@ public class DownloadFunc implements Func1<ResponseBody, Boolean> {
 
     private String savePath = "";
 
-    public DownloadFunc(String s) {
-        savePath = s;
+    public DownloadFunc(String savePath) {
+        this.savePath = savePath;
     }
 
     @Override
@@ -42,13 +44,14 @@ public class DownloadFunc implements Func1<ResponseBody, Boolean> {
         } else if (savePath == null) {
             throw new NullPointerException("写入非法数据！");
         } else {
-            File file = new File(savePath);
-            if (!file.exists()) {
-                if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdirs();
-                }
-                file.createNewFile();
-            }
+//            File file = new File(savePath);
+            File file = FileUtil.createFile(savePath);
+//            if (!file.exists()) {
+//                if (!file.getParentFile().exists()) {
+//                    file.getParentFile().mkdirs();
+//                }
+//                file.createNewFile();
+//            }
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             fileOutputStream.write(b);
             fileOutputStream.close();

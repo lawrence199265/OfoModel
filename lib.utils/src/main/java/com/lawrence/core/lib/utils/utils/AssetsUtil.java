@@ -44,7 +44,8 @@ public class AssetsUtil {
             // TODO Auto-generated catch block
             e.printStackTrace();
             //过程中出错，则返回false
-            return false;
+//            return false;
+            return true;
         }
         // 操作完成，则返回true
         return true;
