@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.zhuangbudong.ofo"
         minSdkVersion 21
@@ -18,6 +18,10 @@ android {
         }
     }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+
+    dexOptions {
+    }
+
 }
 
 dependencies {
@@ -25,9 +29,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:25.1.1'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.1.1'
     compile project(':lib.core')
     compile project(':lib.utils')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

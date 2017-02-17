@@ -3,7 +3,6 @@ package com.lawrence.core.lib.utils.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -71,11 +70,11 @@ public class DataBaseHelper {
     }
 
 
-    public void insert(String name, @NonNull ContentValues data) {
+    public void insert(String name,  ContentValues data) {
         dataBase.getWrite().insert(name, "", data);
     }
 
-    public void insert(String name, @NonNull List<ContentValues> data) {
+    public void insert(String name,  List<ContentValues> data) {
         dataBase.getWrite().beginTransaction();
         for (ContentValues values : data) {
 

@@ -33,13 +33,13 @@ public class DateUtil {
     public enum DateStyle {
         MMdd_HH_MM("MMdd_HH:mm"),
         YYYYMMDDhhmmss("yyyyMMddHHmmss"),
-        YYYYMMDDhhmmssss("yyyyMMddHHmmssss"),
+//        YYYYMMDDhhmmssss("yyyyMMddHHmmssss"),
         YYYYMMDD("yyyyMMdd"),
         YYYY_MM_DD("yyyy-MM-dd"),
         YYYYMMDDPY("yyyy年MM月dd日"),
         YYYYMMDDHHMMPY("yyyy年MM月dd日 HH:mm"),
         YYYY_MM_DD_HH_MM("yyyy-MM-dd HH:mm"),
-        HHMMSS("HH:mm:dd"),
+        HHMMSS("HH:mm:ss"),
         HHMMSSPY("HH时mm分ss秒");
 
 
@@ -84,6 +84,8 @@ public class DateUtil {
     public static String getDate(DateStyle format) {
         return getDate(format.getDateStyle());
     }
+
+
 
 
     /**

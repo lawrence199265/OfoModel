@@ -1,17 +1,22 @@
 package com.zhuangbudong.ofo.activity;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 
 import com.lawrence.core.lib.core.mvp.BaseActivity;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.inter.ILoadingActivity;
 import com.zhuangbudong.ofo.presenter.LoadingPresenter;
+import com.zhuangbudong.ofo.widget.indicator.CircleIndicator;
 
 /**
  * Created by wangxu on 17/2/8.
  */
 
 public class LoadingActivity extends BaseActivity<LoadingPresenter> implements ILoadingActivity {
+
+    private CircleIndicator indicators;
+    private ViewPager vpLoading;
 
     @Override
     protected void initPresenter() {
@@ -26,6 +31,9 @@ public class LoadingActivity extends BaseActivity<LoadingPresenter> implements I
     @Override
     public void initView() {
         presenter.copyResource();
+        indicators = (CircleIndicator) findViewById(R.id.indicators);
+        vpLoading = (ViewPager) findViewById(R.id.vp_loading);
+        indicators.setViewPager(vpLoading);
     }
 
     @Override

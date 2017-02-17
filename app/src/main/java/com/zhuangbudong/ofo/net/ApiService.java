@@ -1,64 +1,105 @@
 package com.zhuangbudong.ofo.net;
 
+import com.lawrence.core.lib.core.net.HttpResult;
+import com.zhuangbudong.ofo.model.Issue;
+import com.zhuangbudong.ofo.model.User;
+
+import org.json.JSONObject;
+
+import java.util.List;
+
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+import rx.Observable;
+
 /**
  * Retrofit api 请求接口定义
- *
- * 希望所有请求全部使用 Get 方式。
- *
+ * <p>
+ * 希望所有请求全部使用 POST 方式（除特殊请求外）.
+ * <p>
  * Created by wangxu on 16/11/24.
  */
 
 public interface ApiService {
 
 
+    /**
+     * 用户登录
+     *
+     * @param userName 用户名
+     * @param password 用户密码
+     * @return 用户信息
+     */
+
+    @FormUrlEncoded
+    @POST("login.do")
+    Observable<HttpResult<User>> login(@Field("userName") String userName, @Field("password") String password);
+
+
+    /**
+     * 用户注册
+     *
+     * @param userName 用户名
+     * @param password 密码
+     * @return 注册成功信息
+     */
+    @FormUrlEncoded
+    @POST("register.do")
+    Observable<HttpResult<JSONObject>> register(@Field("userName") String userName, @Field("password") String password);
+
+
+    /**
+     * 修改用户详细信息
+     *
+     * @param user
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("userDetail.do")
+    Observable<HttpResult<JSONObject>> updateUserDeatil(@Body User user);
+
+
+    /**
+     * 用户发布信息接口
+     *
+     * @param issue
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("issue.do")
+    Observable<HttpResult<JSONObject>> issue(@Body Issue issue);
+
+
+    /**
+     * 用户查询自己的发布信息
+     *
+     * @param userName
+     * @param id
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("myIssue.do")
+    Observable<HttpResult<List<Issue>>> myIssue(@Field("userName") String userName, @Field("id") String id);
+
+    /**
+     * 获取所有发布信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("allIssue.do")
+    Observable<HttpResult<List<Issue>>> allIssue();
+
+
 //    /**
-//     * Login
+//     * 处理照片上传
 //     *
-//     * @param appKey   appkey
-//     * @param userName 用户名
-//     * @param password 登录密码
-//     * @return 用户信息
-//     */
-//
-//    @FormUrlEncoded
-//    @POST("demo/v1.0/userLogin.do")
-//    Observable<User> getUser(@Field("appKey") String appKey, @Field("userName") String userName, @Field("password") String password);
-//
-//
-//    /**
-//     * 根据用户获取对应的商场信息（列表）
-//     *
-//     * @param appKey appkey
-//     * @param userId 用户id
-//     * @return 用户名下所有支持的商场信息
-//     */
-//    @FormUrlEncoded
-//    @POST("demo/mall/v1.0/queryMallList.do")
-//    Observable<Mall> getMallList(@Field("appKey") String appKey, @Field("userId") String userId);
-//
-//
-//    /**
-//     * 下载文件
-//     *
-//     * @param url 下载地址
 //     * @return
 //     */
-//    @Streaming
-//    @GET
-//    Observable<ResponseBody> download(@Url String url);
-//
-//    /**
-//     * 获取楼层信息
-//     *
-//     * @param appKey appkey
-//     * @param mallId 对应楼编号
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("nexd/v1.0/getFloorsInfo.do")
-//    Observable<Floor> getFloors(@Field("appKey") String appKey, @Field("buildingCode") long mallId);
-//
-//    @FormUrlEncoded
-//    @POST("nexd/v1.0/checkProp.do")
-//    Observable<JSONObject> checkUpdate(@Field("appKey") String appKey, @Field("md5") String md5, @Field("buildingCode") String buildingCode);
+//    @Multipart
+//    @PUT("")
+//    Observable uploadImage();
+
 }

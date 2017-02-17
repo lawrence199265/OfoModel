@@ -1,6 +1,7 @@
 package com.lawrence.core.lib.core.net;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.lawrence.core.lib.utils.utils.FileUtil;
 
@@ -17,6 +18,8 @@ import rx.functions.Func1;
 
 public class DownloadFunc implements Func1<ResponseBody, Boolean> {
 
+
+    private static final String TAG = "DownloadFunc";
     private String savePath = "";
 
     public DownloadFunc(String savePath) {
@@ -55,6 +58,7 @@ public class DownloadFunc implements Func1<ResponseBody, Boolean> {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             fileOutputStream.write(b);
             fileOutputStream.close();
+            Log.d(TAG, "saveFile: finished");
         }
     }
 }

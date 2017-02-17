@@ -2,6 +2,7 @@ package com.lawrence.core.lib.core.mvp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 import butterknife.ButterKnife;
 
@@ -22,6 +23,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends Activity imp
         ButterKnife.bind(this);
         initPresenter();
         init();
+        Log.d(TAG, "onCreate: finished" );
     }
 
     private void init() {
@@ -29,6 +31,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends Activity imp
             throw new NullPointerException("初始化 presenter 失败");
         }
         presenter.init();
+        Log.d(TAG, "init: finished" );
     }
 
     protected abstract void initPresenter();

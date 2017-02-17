@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -15,53 +16,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <RadioGroup
+    <com.zhuangbudong.ofo.widget.indicator.CircleIndicator
+        android:id="@+id/indicators"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:visibility="visible"
-        >
-
-        <RadioButton
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/bg_vp_dot"
-            android:button="@null"
-            android:checked="true"
-            />
-
-        <RadioButton
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/bg_vp_dot"
-            android:button="@null"
-            />
-        <RadioButton
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/bg_vp_dot"
-            android:button="@null"
-            />
-        <RadioButton
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="16dp"
-            android:button="@null"
-            android:background="@drawable/bg_vp_dot"
-            />
-        <RadioButton
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="16dp"
-            android:button="@null"
-            android:background="@drawable/bg_vp_dot"
-            />
-    </RadioGroup>
+        app:layoutGravity="center"
+        app:margin="5dp"
+        app:mode="outside"
+        app:normalBackground="@android:color/white"
+        app:radius="10dp"
+        app:selectedBackground="#ffe6454a"/>
 
 
 </RelativeLayout>
