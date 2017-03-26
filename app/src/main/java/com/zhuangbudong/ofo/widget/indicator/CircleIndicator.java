@@ -11,6 +11,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.zhuangbudong.ofo.R;
@@ -35,6 +36,7 @@ public class CircleIndicator extends View {
     private int indicatorSelectedBackground;
     private Gravity indicatorLayoutGravity;
     private Mode indicatorMode;
+    private static final String TAG = "CircleIndicator";
 
     public enum Mode {
         INSIDE,
@@ -57,11 +59,11 @@ public class CircleIndicator extends View {
 
 
     public CircleIndicator(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public CircleIndicator(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context, attrs, 0);
     }
 
     public CircleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -73,6 +75,8 @@ public class CircleIndicator extends View {
         indicators = new ArrayList<>();
         resolveAttrs(context, attrs);
     }
+
+
 
     private void resolveAttrs(Context context, AttributeSet attrs) {
         if (attrs == null) {
@@ -103,20 +107,28 @@ public class CircleIndicator extends View {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
                 if (indicatorMode != Mode.SOLO) {
                     moveToSelectedPosition(position, positionOffset);
                 }
-
             }
 
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+
                 if (indicatorMode != Mode.SOLO) {
                     moveToSelectedPosition(position, 0);
                 }
             }
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+
+
+
+            }
         });
 
     }

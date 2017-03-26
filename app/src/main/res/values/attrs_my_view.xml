@@ -1,31 +1,38 @@
 <resources>
     <declare-styleable name="MyView">
-        <attr name="exampleString" format="string"/>
-        <attr name="exampleDimension" format="dimension"/>
-        <attr name="exampleColor" format="color"/>
-        <attr name="exampleDrawable" format="color|reference"/>
+        <attr name="exampleString" format="string" />
+        <attr name="exampleDimension" format="dimension" />
+        <attr name="exampleColor" format="color" />
+        <attr name="exampleDrawable" format="color|reference" />
     </declare-styleable>
     <declare-styleable name="CircleIndicator">
-        <attr name="radius" format="dimension"/>
-        <attr name="margin" format="dimension"/>
-        <attr name="normalBackground" format="color"/>
-        <attr name="selectedBackground" format="color"/>
-
+        <attr name="radius" format="dimension" />
+        <attr name="margin" format="dimension" />
+        <attr name="normalBackground" format="color" />
+        <attr name="selectedBackground" format="color" />
 
 
         <attr name="mode">
 
-            <enum name="inside" value="0"/>
-            <enum name="outside" value="1"/>
-            <enum name="solo" value="2"/>
+            <enum name="inside" value="0" />
+            <enum name="outside" value="1" />
+            <enum name="solo" value="2" />
         </attr>
         <attr name="layoutGravity">
-            <enum name="left" value="0"/>
-            <enum name="center" value="1"/>
-            <enum name="right" value="2"/>
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
         </attr>
 
     </declare-styleable>
+
+
+    <declare-styleable name="BannerAdapter">
+        <attr name="vp_layout_width" format="dimension" />
+        <attr name="vp_layout_height" format="dimension" />
+    </declare-styleable>
+
+
 
 
 </resources>

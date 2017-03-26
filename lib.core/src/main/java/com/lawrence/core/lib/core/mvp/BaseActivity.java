@@ -2,6 +2,7 @@ package com.lawrence.core.lib.core.mvp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import butterknife.ButterKnife;
@@ -10,7 +11,7 @@ import butterknife.ButterKnife;
  * Created by wangxu on 17/1/11.
  */
 
-public abstract class BaseActivity<T extends BasePresenter> extends Activity implements IBaseView {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView {
 
     public static final String TAG = "BaseActivity";
 

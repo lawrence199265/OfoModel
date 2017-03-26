@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+
 
     <ImageView
+        android:id="@+id/loading_iv_start"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/start"
-        />
+        android:src="@drawable/start" />
+
+    <TextView
+        android:id="@+id/loading_tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="5"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_loading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.zhuangbudong.ofo.widget.indicator.CircleIndicator
         android:id="@+id/indicators"
@@ -22,13 +38,12 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        app:layoutGravity="center"
-        app:margin="5dp"
+        android:visibility="gone"
+        app:margin="10dp"
         app:mode="outside"
-        app:normalBackground="@android:color/white"
-        app:radius="10dp"
-        app:selectedBackground="#ffe6454a"/>
+        app:normalBackground="@android:color/darker_gray"
+        app:radius="5dp"
+        app:selectedBackground="@color/main_color" />
 
 
 </RelativeLayout>

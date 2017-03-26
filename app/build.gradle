@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.zhuangbudong.ofo"
         minSdkVersion 21
@@ -17,10 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        mavenCentral()
+
+        jcenter()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url "https://jitpack.io" }
+
+    }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 
     dexOptions {
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        // ... and any other excludes go here
+    }
+
 
 }
 
@@ -29,10 +42,16 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    testCompile 'junit:junit:4.12'
     compile project(':lib.core')
     compile project(':lib.utils')
+    compile project(':photoview')
+
+    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    compile 'com.github.martin90s:ImagePicker:v1.3.2'
+    testCompile 'junit:junit:4.12'
 }

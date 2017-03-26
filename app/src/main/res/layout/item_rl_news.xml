@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:id="@+id/ll_container_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <com.zhuangbudong.ofo.widget.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ease_default_avatar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginLeft="8dp"
+            android:text="用户名"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/woman" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/homepage_authentication" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/worth"
+            android:gravity="right|center"
+            android:paddingBottom="2dp"
+            android:paddingRight="10dp"
+            android:text="300"
+            android:textColor="@android:color/white"
+            android:textSize="10sp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignLeft="@+id/ll_container_user"
+        android:layout_alignRight="@+id/ll_container_user"
+        android:layout_below="@+id/ll_container_user"
+        android:background="@color/item_line_color" />
+
+
+    <ImageView
+        android:id="@+id/iv_homepage_article"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/line"
+        android:layout_below="@+id/line"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:src="@drawable/homepage_article" />
+
+    <TextView
+        android:id="@+id/main_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_homepage_article"
+        android:layout_alignTop="@+id/iv_homepage_article"
+        android:layout_below="@+id/line"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/iv_homepage_article"
+        android:gravity="center_vertical"
+        android:text="菩提子佛珠"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/main_tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_tv_title"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="说明信息说明信息说明信息说明信息说明信息说明信息说明信息说明信息说明信息说明信息"
+        android:textSize="14sp" />
+
+
+    <com.zhuangbudong.ofo.widget.MultiImageView
+        android:id="@+id/main_iv_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_tv_info"
+        android:layout_marginTop="5dp" />
+
+
+</RelativeLayout>

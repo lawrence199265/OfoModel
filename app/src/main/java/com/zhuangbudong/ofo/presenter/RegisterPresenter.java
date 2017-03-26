@@ -11,4 +11,5 @@ public class RegisterPresenter extends OfoBasePresenter<IRegisterActivity>{
     public RegisterPresenter(IRegisterActivity iView, Context context) {
         super(iView, context);
     }
+
 }

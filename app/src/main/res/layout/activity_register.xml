@@ -1,74 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:gravity="center"
+    android:animateLayoutChanges="true"
     tools:context="com.zhuangbudong.ofo.activity.RegisterActivity">
 
+    <RelativeLayout
+        android:id="@+id/rl_match_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/tv_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="@string/text_user_name"/>
+        <TextView
+            android:id="@+id/label_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="请通过安全校验" />
 
-    <EditText
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/tv_user_name"
-        android:layout_toRightOf="@id/tv_user_name"
-        android:hint="@string/hint_please_input_user_name"
-        android:inputType="text"/>
+        <com.zhuangbudong.ofo.widget.SwipeCaptchaView
+            android:id="@+id/register_captcha_view"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/label_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pic11"
+            app:captchaHeight="30dp"
+            app:captchaWidth="30dp" />
+
+        <SeekBar
+            android:id="@+id/register_drag_bar"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/register_captcha_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:maxHeight="30dp"
+            android:progressDrawable="@drawable/bg_drag"
+            android:thumb="@drawable/bg_drag_thumb" />
+
+    </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/tv_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_user_name"
-        android:layout_marginTop="5dp"
-        android:text="@string/text_password"/>
-
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/tv_password"
-        android:layout_toRightOf="@id/tv_password"
-        android:hint="@string/hint_please_input_password"
-        android:inputType="textPassword"/>
-
-    <TextView
-        android:id="@+id/tv_password_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_password"
-        android:layout_marginTop="5dp"
-        android:text="@string/text_password_again"/>
-
-    <EditText
-        android:id="@+id/et_password_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/tv_password_again"
-        android:layout_toRightOf="@id/tv_password_again"
-        android:hint="@string/hint_please_input_password_again"
-        android:inputType="textPassword"/>
-
-    <Button
-        android:id="@+id/btn_register"
+    <RelativeLayout
+        android:id="@+id/register_rl_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_password_again"
-        android:text="@string/button_register"/>
+        android:layout_centerInParent="true"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:visibility="visible">
+
+
+        <ImageView
+            android:id="@+id/register_user_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ad4" />
+
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_user_head"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/text_user_name"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_user_name"
+            android:layout_toRightOf="@id/tv_user_name"
+            android:background="@null"
+            android:hint="@string/hint_please_input_user_name"
+            android:inputType="text"
+            android:paddingLeft="5dp"
+            android:textSize="14sp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_user_name"
+            android:background="@color/item_line_color" />
+
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_user_name"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/text_password"
+            android:textSize="16sp" />
+
+
+        <com.zhuangbudong.ofo.widget.XEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_password"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_password"
+            android:background="@null"
+            android:hint="@string/hint_please_input_password"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_password"
+            android:background="@color/item_line_color" />
+
+        <TextView
+            android:id="@+id/tv_password_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_password"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/text_password_again"
+            android:textSize="16sp" />
+
+        <com.zhuangbudong.ofo.widget.XEditText
+            android:id="@+id/et_password_again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_password_again"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_password_again"
+            android:background="@null"
+            android:hint="@string/hint_please_input_password_again"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_password_again"
+            android:background="@color/item_line_color" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_password_again"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_login"
+            android:text="@string/button_register"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/register_jump_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_register"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="已有账户, 点击登录"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/register_tl_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/main_color"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
 </RelativeLayout>

@@ -344,7 +344,7 @@ public class FileUtil {
      * @param targetDir 目标目录路径
      * @throws IOException
      */
-    public static void copyFile( File srcFile, String targetDir) throws IOException {
+    public static void copyFile(File srcFile, String targetDir) throws IOException {
 
         File targetFile = null;
 
@@ -461,14 +461,16 @@ public class FileUtil {
 
     // 文件压缩
     private static void compressFile(File resFile, ZipOutputStream zipOutputStream, String dir) throws Exception {
+
+        dir = dir + (dir.trim().length() == 0 ? "" : File.separator) + resFile.getName();
+
         if (resFile.isDirectory()) {
             File[] fileList = resFile.listFiles();
 
-            zipOutputStream.putNextEntry(new ZipEntry(dir + "/"));
+            zipOutputStream.putNextEntry(new ZipEntry(dir));
 
-            dir = dir.length() == 0 ? "" : dir + "/";
             for (File file : fileList) {
-                compressFile(file, zipOutputStream, dir + file.getName());
+                compressFile(file, zipOutputStream, dir);
             }
         } else if (resFile.isFile()) {
 
@@ -492,7 +494,7 @@ public class FileUtil {
      *
      * @param file Target file
      */
-    public static void deleteFile( File file) {
+    public static void deleteFile(File file) {
         if (!file.exists()) {
             return;
         }
@@ -514,7 +516,7 @@ public class FileUtil {
      *
      * @param targetFilePath target file path
      */
-    public static void deleteFile( String targetFilePath) throws IOException {
+    public static void deleteFile(String targetFilePath) throws IOException {
         if (TextUtils.isEmpty(targetFilePath)) {
             throw new IllegalArgumentException(targetFilePath + " 非法路径!");
         }
@@ -601,7 +603,7 @@ public class FileUtil {
      * @return the file`s content
      * @throws IOException
      */
-    public static String readFile( String path) throws IOException {
+    public static String readFile(String path) throws IOException {
 
         if (TextUtils.isEmpty(path)) {
             throw new IllegalArgumentException(path + " 非法路径!");
@@ -609,7 +611,7 @@ public class FileUtil {
         return readFile(new File(path));
     }
 
-    public static String readFile( File file) throws IOException {
+    public static String readFile(File file) throws IOException {
         if (!file.exists()) {
             throw new FileNotFoundException(file.getAbsolutePath() + " 文件未找到!");
         }
@@ -638,7 +640,7 @@ public class FileUtil {
         return stringBuilder.toString();
     }
 
-    public static String readFile( InputStream inputStream) throws IOException {
+    public static String readFile(InputStream inputStream) throws IOException {
         if (inputStream.available() == 0) {
             throw new IllegalArgumentException("this is a empty file!");
         }

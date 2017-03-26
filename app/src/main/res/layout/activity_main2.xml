@@ -1,54 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:clipChildren="false"
     tools:context="com.zhuangbudong.ofo.activity.Main2Activity">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/main_fl_container"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/ic_account_balance_black_24dp"
-            android:gravity="center"
-            android:scaleX="0.4"
-            android:scaleY="1"/>
+        android:layout_height="match_parent" />
 
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/ic_add_circle_outline_black_24dp"
-            android:gravity="center"
-            android:scaleX="0.4"
-            android:scaleY="1"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/ic_account_box_black_24dp"
-            android:gravity="center"
-            android:scaleX="0.4"
-            android:scaleY="1"/>
-
-    </LinearLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+    <com.zhuangbudong.ofo.widget.TabLayout
+        android:id="@+id/main_tab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#e4e4e4"
+        app:indicatorColor="@color/main_color"
+        app:textSize="12sp" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <RelativeLayout
+        android:id="@+id/iv_add"
+        android:layout_width="wrap_content"
+        android:layout_height="55dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_centerInParent="true"
+            android:src="@drawable/bg_add" />
+
+        <ImageView
+            android:id="@+id/add_iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/add" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
