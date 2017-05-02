@@ -32,7 +32,7 @@ import java.util.Random;
 import static com.zhuangbudong.ofo.widget.DrawHelperUtils.drawPartCircle;
 
 /**
- * Created by xunzongxia on 17/3/23.
+ * Created by xxx on 17/3/23.
  */
 
 public class SwipeCaptchaView extends ImageView {

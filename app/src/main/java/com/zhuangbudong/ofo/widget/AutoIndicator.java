@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import com.zhuangbudong.ofo.R;
 
 /**
- * Created by xunzongxia on 17/2/24.
+ * Created by xxx on 17/2/24.
  */
 
 public class AutoIndicator extends LinearLayout {

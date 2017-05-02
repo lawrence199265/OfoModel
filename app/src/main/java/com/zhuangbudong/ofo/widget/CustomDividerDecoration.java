@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.zhuangbudong.ofo.R;
 
 /**
- * Created by xunzongxia on 17/3/20.
+ * Created by xxx on 17/3/20.
  */
 
 public class CustomDividerDecoration extends RecyclerView.ItemDecoration {
@@ -118,6 +118,9 @@ public class CustomDividerDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
         if (mOrientation == VERTICAL) {
+            if (parent.getChildAdapterPosition(view) == 0) {
+                return;
+            }
             outRect.set(0, 0, 0, lineHeight);
         } else {
             outRect.set(0, 0, lineHeight, 0);

@@ -1,26 +1,6 @@
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.jcodecraeer.xrecyclerview.XRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/news_rl_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.zhuangbudong.ofo.widget.BannerViewPager
-            android:id="@+id/news_banner_vp"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/news_rl_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:nestedScrollingEnabled="false"
-            android:paddingBottom="36dp" />
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+    android:nestedScrollingEnabled="false"
+    android:paddingBottom="20dp" />

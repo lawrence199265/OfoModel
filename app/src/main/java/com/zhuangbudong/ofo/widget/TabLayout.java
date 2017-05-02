@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by xunzongxia on 17/3/2.
+ * Created by xxx on 17/3/2.
  */
 
 public class TabLayout extends LinearLayout {
@@ -90,18 +90,11 @@ public class TabLayout extends LinearLayout {
                 resetTab();
                 tabItem.setIndicatorAlpha(1.0f);
                 if (listener != null) {
-//                    if (currentPosition != position) {
                     listener.onClick(tabItem, position);
-//                        currentPosition = position;
-//                    }
                 }
             }
         });
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(getScreenWidth() / mTabCount, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        if (position == mTabCount - 1) {
-//            lp.rightMargin = 100;
-//        }
-
         addView(tabItem, position, lp);
     }
 

@@ -17,13 +17,25 @@ import com.zhuangbudong.ofo.R;
 public class PopupMenuUtil {
 
     private static final String TAG = "PopupMenuUtil";
+    private OnItemClickListener onItemClickListener;
+    public static final int TYPE_RENT = 2;
+    public static final int TYPE_SWAP = 1;
 
     public static PopupMenuUtil getInstance() {
         return MenuUtilHolder.INSTANCE;
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     private static class MenuUtilHolder {
         public static PopupMenuUtil INSTANCE = new PopupMenuUtil();
+    }
+
+
+    public interface OnItemClickListener {
+        void onClick(int position);
     }
 
     private View rootVew;
@@ -122,7 +134,9 @@ public class PopupMenuUtil {
                 //加号按钮点击之后的执行
                 rlClickAction();
             } else {
-                showToast(context, "index=" + index);
+                if (onItemClickListener != null) {
+                    onItemClickListener.onClick(index);
+                }
             }
         }
     }

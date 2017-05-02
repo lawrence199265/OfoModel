@@ -16,4 +16,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_save">保存</string>
     <string name="label_register">注册</string>
+    <string name="label_rent">物品出租</string>
+
+
+    <string name="text_arrow_down">\ue64b</string>
+    <string name="text_arrow_up">\ue64a</string>
+    <string name="text_arrow_right">\ue64c</string>
+    <string name="text_arrow_left">\ue64d</string>
+    <string name="label_man">男</string>
+    <string name="label_woman">女</string>
+    <string name="label_title_swap">物品交换</string>
+
+    <string name="view_omit_style_content">%1$d人参与</string>
+
 </resources>

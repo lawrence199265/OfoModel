@@ -6,4 +6,12 @@
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="image_final_width">45dp</dimen>
     <dimen name="image_width">45dp</dimen>
+
+    <dimen name="dimens_item_padding_left">1.0dp</dimen>
+    <dimen name="dimens_item_padding_right">1.0dp</dimen>
+    <dimen name="dimens_item_padding_top">-0.5dp</dimen>
+    <dimen name="dimens_item_padding_bottom">-0.5dp</dimen>
+    <dimen name="divider_size">16dp</dimen>
+
+    <dimen name="omit_tv_size">12sp</dimen>
 </resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_tab"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="12dp"
+    android:paddingTop="10dp">
+
+
+    <EditText
+        android:id="@+id/dialog_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/et_input_box"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="5"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:singleLine="true"
+        android:textColor="#6c6c6c"
+        android:textSize="13sp">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/dialog_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dialog_edit_text"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="完成"
+        android:textColor="@color/main_color" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_edit_text"
+        android:layout_alignRight="@+id/dialog_edit_text"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rg_item_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rg_check_bg"
+            android:button="@null"
+            android:checked="true"
+            android:text="元/小时"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:textColor="@drawable/rg_check_text_color" />
+
+        <RadioButton
+            android:id="@+id/rg_item_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rg_check_bg"
+            android:button="@null"
+            android:text="元/天"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:textColor="@drawable/rg_check_text_color" />
+
+        <RadioButton
+            android:id="@+id/rg_item_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rg_check_bg"
+            android:button="@null"
+            android:text="元/月"
+            android:gravity="center"
+            android:textColor="@drawable/rg_check_text_color" />
+    </RadioGroup>
+
+</RelativeLayout>

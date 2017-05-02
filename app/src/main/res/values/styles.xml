@@ -44,4 +44,66 @@
         <item name="overlapAnchor">false</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
     </style>
 
+    <style name="dialog" parent="android:style/Theme.Dialog">
+        <!-- 透明背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 无边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否没有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+
+    </style>
+
+    <style name="style_item" parent="android:Animation">
+        <!-- 从屏幕底部弹出 -->
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <!-- 从弹出的位置收回 -->
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="style_list_item">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/bg_list_item</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:checkable">true</item>
+    </style>
+
+    <style name="style_list_item_text">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="style_list_item_right_arrow">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:src">@drawable/ic_arrow_right</item>
+
+    </style>
+
+    <style name="style_list_item_left_icon" parent="@style/style_list_item_parent">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:src">@drawable/ic_arrow_left</item>
+    </style>
+
+    <style name="style_list_item_parent">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_weight">0.0</item>
+    </style>
+
 </resources>

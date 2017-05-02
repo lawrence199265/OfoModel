@@ -12,7 +12,7 @@ import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.widget.OnPageClickListener;
 
 /**
- * Created by xunzongxia on 17/2/24.
+ * Created by xxx on 17/2/24.
  */
 
 public class LoadingAdapter extends PagerAdapter {

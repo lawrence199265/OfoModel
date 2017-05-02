@@ -24,7 +24,7 @@ import android.view.View;
 import com.zhuangbudong.ofo.R;
 
 /**
- * Created by xunzongxia on 17/3/2.
+ * Created by xxx on 17/3/2.
  */
 
 public class TabItem extends View {

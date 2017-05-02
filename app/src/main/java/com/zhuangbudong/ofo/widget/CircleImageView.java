@@ -24,7 +24,7 @@ import com.zhuangbudong.ofo.R;
 
 
 /**
- * Created by xunzongxia on 17/3/20.
+ * Created by xxx on 17/3/20.
  */
 
 public class CircleImageView extends AppCompatImageView {

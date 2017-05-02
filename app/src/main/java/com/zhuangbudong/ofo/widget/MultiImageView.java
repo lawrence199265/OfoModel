@@ -16,7 +16,7 @@ import com.zhuangbudong.ofo.utils.DensityUtils;
 import java.util.List;
 
 /**
- * Created by xunzongxia on 17/3/14.
+ * Created by xxx on 17/3/14.
  */
 
 public class MultiImageView extends LinearLayout {

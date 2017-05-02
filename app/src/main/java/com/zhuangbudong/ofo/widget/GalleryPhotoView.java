@@ -24,7 +24,7 @@ import uk.co.senab.photoview.PhotoView;
 
 
 /**
- * Created by xunzongxia on 17/3/20.
+ * Created by xxx on 17/3/20.
  */
 
 public class GalleryPhotoView extends PhotoView {

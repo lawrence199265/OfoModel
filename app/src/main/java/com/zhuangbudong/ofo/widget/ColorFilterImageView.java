@@ -13,7 +13,7 @@ import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
 /**
- * Created by xunzongxia on 17/3/14.
+ * Created by xxx on 17/3/14.
  */
 public class ColorFilterImageView extends ImageView implements View.OnTouchListener {
 

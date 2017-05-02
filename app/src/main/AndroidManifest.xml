@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".application.OfoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,30 +13,37 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoadingActivity"
-            android:theme="@style/AppTheme.Fullscreen"></activity>
-        <activity android:name=".activity.Main2Activity">
+            android:theme="@style/AppTheme.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.SignInActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+        <activity android:name=".activity.Main2Activity">
 
         </activity>
+        <activity
+            android:name=".activity.SignInActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <meta-data
             android:name="com.zhuangbudong.ofo.widget.GlideConfiguration"
             android:value="GlideModule" />
 
         <activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:theme="@style/ImagePickerThemeFullScreen" />
+        <activity
             android:name=".activity.ImagePagerActivity"
             android:theme="@style/AppTheme.ImageBrowse" />
+        <activity android:name=".activity.RentActivity" />
+        <activity android:name=".activity.PersonInfoActivity"></activity>
+        <activity android:name=".activity.SwapActivity"></activity>
+        <activity android:name=".activity.DetailActivity"></activity>
     </application>
 
 </manifest>

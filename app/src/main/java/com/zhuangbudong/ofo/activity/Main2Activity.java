@@ -1,7 +1,6 @@
 package com.zhuangbudong.ofo.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,8 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.zhuangbudong.ofo.activity.SignInActivity.EXTRA_SIGN_OK;
+import static com.zhuangbudong.ofo.utils.PopupMenuUtil.TYPE_RENT;
+import static com.zhuangbudong.ofo.utils.PopupMenuUtil.TYPE_SWAP;
 
-public class Main2Activity extends AppCompatActivity implements TabLayout.OnTabClickListener {
+public class Main2Activity extends AppCompatActivity implements TabLayout.OnTabClickListener, PopupMenuUtil.OnItemClickListener {
     private static final int REQUEST_CODE = 0;
 
     /**
@@ -73,6 +74,7 @@ public class Main2Activity extends AppCompatActivity implements TabLayout.OnTabC
             @Override
             public void onClick(View v) {
                 PopupMenuUtil.getInstance().show(Main2Activity.this, ivAdd);
+                PopupMenuUtil.getInstance().setOnItemClickListener(Main2Activity.this);
             }
         });
     }
@@ -125,7 +127,7 @@ public class Main2Activity extends AppCompatActivity implements TabLayout.OnTabC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
+        getMenuInflater().inflate(R.menu.menu_rent, menu);
         return true;
     }
 
@@ -158,5 +160,19 @@ public class Main2Activity extends AppCompatActivity implements TabLayout.OnTabC
             isNotLogin = data.getBooleanExtra(EXTRA_SIGN_OK, false);
         }
 
+    }
+
+    @Override
+    public void onClick(int position) {
+        switch (position) {
+            case TYPE_RENT:
+                startActivity(new Intent(this, RentActivity.class));
+                PopupMenuUtil.getInstance().close();
+                break;
+            case TYPE_SWAP:
+                startActivity(new Intent(this, SwapActivity.class));
+                PopupMenuUtil.getInstance().close();
+                break;
+        }
     }
 }
