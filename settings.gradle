@@ -1,1 +1,1 @@
-include ':app', ':lib.core', ':lib.utils', ':photoview'
+include ':app', ':lib.core', ':lib.utils'

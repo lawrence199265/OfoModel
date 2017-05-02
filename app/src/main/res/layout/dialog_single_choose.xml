@@ -17,7 +17,7 @@
         android:paddingRight="8dp"
         android:paddingTop="8dp"
         android:text="完成"
-        android:textColor="@color/black"
+        android:textColor="#000"
         android:textSize="16sp" />
 
     <View
