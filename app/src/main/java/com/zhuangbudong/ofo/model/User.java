@@ -7,8 +7,11 @@ import android.os.Parcelable;
  * Created by wangxu on 17/2/17.
  */
 
-public class User implements Parcelable{
+public class User implements Parcelable {
 
+
+    private String userName;
+    private String password;
     private String nickName;
     private String id;
     private String address;
@@ -91,5 +94,21 @@ public class User implements Parcelable{
         dest.writeString(address);
         dest.writeString(email);
         dest.writeString(phone);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

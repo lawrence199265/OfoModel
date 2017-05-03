@@ -21,4 +21,5 @@ public class Constants {
             R.drawable.ic_kaede_akatsuki
 
     };
+
 }

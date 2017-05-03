@@ -44,6 +44,4 @@ public class HttpResult<T> {
         this.error = error;
     }
 
-    public static class DataBean {
-    }
 }

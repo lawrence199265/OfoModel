@@ -1,12 +1,12 @@
 package com.zhuangbudong.ofo.net;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.zhuangbudong.ofo.Config;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -30,7 +30,7 @@ public class RetrofitNetApi {
                     .client(builder.build())
                     .baseUrl(Config.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
 
             apiServiceInstance = retrofit.create(ApiService.class);

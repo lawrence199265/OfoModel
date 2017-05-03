@@ -13,10 +13,11 @@ import com.zhuangbudong.ofo.net.RetrofitNetApi;
 
 class OfoBasePresenter<T extends IBaseView> extends BasePresenter<T> {
 
-    private ApiService apiService;
+    public ApiService apiService;
 
     OfoBasePresenter(T iView, Context context) {
         super(iView, context);
         apiService = RetrofitNetApi.getApiServiceInstance();
     }
+
 }

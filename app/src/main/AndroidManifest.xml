@@ -3,6 +3,7 @@
     package="com.zhuangbudong.ofo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".application.OfoApplication"
@@ -13,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoadingActivity"
-            android:theme="@style/AppTheme.Fullscreen" >
+            android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

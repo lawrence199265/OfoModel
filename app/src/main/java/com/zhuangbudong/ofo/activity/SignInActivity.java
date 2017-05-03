@@ -3,17 +3,31 @@ package com.zhuangbudong.ofo.activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.lawrence.core.lib.core.mvp.BaseActivity;
+import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.inter.ISignInActivity;
+import com.zhuangbudong.ofo.model.User;
+import com.zhuangbudong.ofo.net.RetrofitNetApi;
 import com.zhuangbudong.ofo.presenter.SignInPresenter;
+import com.zhuangbudong.ofo.utils.DialogUtil;
 import com.zhuangbudong.ofo.widget.XEditText;
+
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements ISignInActivity, View.OnClickListener {
 
@@ -40,12 +54,30 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements ISi
         btnRegister = (Button) findViewById(R.id.btn_register);
         btnSign.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
+        userEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                pwdEdit.setText(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        DialogUtil.init(this);
 
     }
 
     @Override
     public void showToast(String msg) {
-
+        Log.d(TAG, "showToast: " + msg);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -58,16 +90,30 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements ISi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sign:
-                Intent intent = new Intent();
-                intent.putExtra(EXTRA_SIGN_OK, true);
-                setResult(RESULT_OK, intent);
-                finish();
-
+                presenter.signIn(userEdit.getText().toString(), pwdEdit.getText().toString());
                 break;
             case R.id.btn_register:
                 startActivity(new Intent(SignInActivity.this, RegisterActivity.class));
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void showLoading() {
+        DialogUtil.buildLoading("提示", "登录中").show();
+    }
+
+    @Override
+    public void dismissLoading() {
+        DialogUtil.dismissLoading();
+    }
+
+    @Override
+    public void startIntent() {
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_SIGN_OK, true);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
