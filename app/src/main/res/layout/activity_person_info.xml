@@ -9,63 +9,59 @@
     tools:context="com.zhuangbudong.ofo.activity.PersonInfoActivity">
 
 
-    <com.zhuangbudong.ofo.widget.LinearLayoutListItemView
-        android:id="@+id/personal_info_sex"
+    <EditText
+        android:id="@+id/personal_info_email"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_below="@+id/appbar"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        app:clickable="true"
-        app:list_item_style="listitem_menu"
-        app:text_left="性别"
-        app:text_left_fontsize="18"
-        app:text_margin_left="16"
-        app:text_margin_right="16"
-        app:text_right=""
-        app:text_right_fontcolor="@color/gray3"
-        app:text_right_fontsize="18" />
+        android:hint="请输入Email"
+        android:paddingLeft="16dp"
+        android:textSize="16sp" />
 
-    <com.zhuangbudong.ofo.widget.LinearLayoutListItemView
-        android:id="@+id/personal_info_birthday"
+    <EditText
+        android:id="@+id/personal_info_tel"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@id/personal_info_sex"
+        android:layout_below="@id/personal_info_email"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        app:clickable="true"
-        app:list_item_line_show_model="listitem_show_top_line"
-        app:list_item_style="listitem_menu"
-        app:list_item_top_line_height_size="1"
-        app:list_item_top_line_width_size="100"
-        app:text_left="生日"
-        app:text_left_fontsize="18"
-        app:text_margin_left="16"
-        app:text_margin_right="16"
-        app:text_right=""
-        app:text_right_fontcolor="@color/gray3"
-        app:text_right_fontsize="18" />
+        android:hint="请输入联系方式"
+        android:paddingLeft="16dp"
+        android:textSize="16sp" />
 
     <com.zhuangbudong.ofo.widget.LinearLayoutListItemView
         android:id="@+id/personal_info_address"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/personal_info_birthday"
+        android:layout_below="@+id/personal_info_tel"
+        android:layout_marginBottom="1dp"
         android:gravity="center_vertical"
         app:clickable="true"
-        app:list_item_line_show_model="listitem_show_top_line"
+        app:list_item_line_show_model="listitem_show_no_line"
         app:list_item_style="listitem_menu"
-        app:list_item_top_line_height_size="1"
-        app:list_item_top_line_width_size="100"
         app:text_left="地址"
-        app:text_left2="(现住地址)"
+        app:text_left2="(省市区)"
         app:text_left2_fontcolor="@color/gray3"
         app:text_left2_fontsize="14"
         app:text_left_fontsize="18"
-        app:text_margin_left="16"
-        app:text_margin_right="10"
         app:text_right=""
         app:text_right_fontcolor="@color/gray3"
         app:text_right_fontsize="14" />
+
+    <EditText
+        android:id="@+id/personal_et_detail_address"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/personal_info_address"
+        android:background="@color/white"
+        android:hint="详细地址"
+        android:paddingLeft="16dp"
+        android:textSize="16sp" />
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"

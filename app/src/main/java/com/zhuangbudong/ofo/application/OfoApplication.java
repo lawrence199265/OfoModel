@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
+import com.zhuangbudong.ofo.model.UserRepository;
 import com.zhuangbudong.ofo.utils.GlideImageLoader;
 
 /**
@@ -12,9 +13,19 @@ import com.zhuangbudong.ofo.utils.GlideImageLoader;
 
 public class OfoApplication extends Application {
     private static OfoApplication application;
+    public int userId = -1;
+
+    private static UserRepository userRepository;
 
     public static OfoApplication getInstance() {
         return application;
+    }
+
+    public UserRepository getUserRepository() {
+        if (userRepository == null) {
+            userRepository = new UserRepository();
+        }
+        return userRepository;
     }
 
     @Override
@@ -37,4 +48,6 @@ public class OfoApplication extends Application {
         imagePicker.setOutPutX(1000);
         imagePicker.setOutPutY(1000);
     }
+
+
 }

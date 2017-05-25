@@ -2,18 +2,20 @@ package com.zhuangbudong.ofo.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.lawrence.core.lib.core.net.ApiException;
 import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.activity.inter.ISignInActivity;
+import com.zhuangbudong.ofo.application.OfoApplication;
 import com.zhuangbudong.ofo.model.User;
+import com.zhuangbudong.ofo.model.UserRepository;
 import com.zhuangbudong.ofo.net.SchedulersTransformer;
 import com.zhuangbudong.ofo.utils.AppUtil;
 
+
 import io.reactivex.Observer;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import rx.Subscriber;
 
 /**
  * Created by wangxu on 17/2/9.
@@ -42,30 +44,38 @@ public class SignInPresenter extends OfoBasePresenter<ISignInActivity> {
         apiService.login(userName, pwd)
                 .compose(new SchedulersTransformer<HttpResult<User>>())
                 .subscribe(new Observer<HttpResult<User>>() {
+                               Disposable disposable;
 
                                @Override
                                public void onSubscribe(Disposable d) {
+                                   disposable = d;
                                }
 
                                @Override
                                public void onNext(HttpResult<User> userHttpResult) {
-                                   iView.startIntent();
+
+                                   if (userHttpResult.getError() == 0 && userHttpResult.getData() != null) {
+                                       OfoApplication.getInstance().userId = Integer.parseInt(userHttpResult.getData().getId());
+                                       userRepository.updateUser(userHttpResult.getData());
+                                       iView.startIntent();
+                                   } else {
+                                       throw new ApiException(userHttpResult.getMsg());
+                                   }
                                }
 
                                @Override
                                public void onError(Throwable e) {
                                    iView.showToast(e.toString());
+                                   disposable.dispose();
                                    iView.dismissLoading();
                                }
 
                                @Override
                                public void onComplete() {
-                                   iView.dismissLoading();
+
                                }
                            }
-                )
-
-        ;
+                );
 
     }
 }

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
-    tools:context=".activity.PersonActivity">
+    android:fitsSystemWindows="false">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/main_abl_app_bar"
@@ -25,14 +23,14 @@
                 android:orientation="vertical">
 
                 <FrameLayout
-                    android:id="@+id/fl_head"
+                    android:id="@+id/personal_fl_head"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="75dp">
 
                     <com.zhuangbudong.ofo.widget.CircleImageView
-                        android:id="@+id/head"
+                        android:id="@+id/personal_iv_head"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:src="@drawable/ease_default_avatar" />
@@ -50,7 +48,7 @@
                     android:id="@+id/rl_user_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/fl_head"
+                    android:layout_below="@+id/personal_fl_head"
                     android:layout_marginTop="10dp"
                     android:gravity="center">
 
@@ -207,6 +205,7 @@
 
 
     <Button
+        android:id="@+id/fg_btn_quit"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_below="@+id/mine_content"

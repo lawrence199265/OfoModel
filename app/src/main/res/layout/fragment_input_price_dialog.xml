@@ -18,12 +18,14 @@
         android:layout_marginBottom="10dp"
         android:layout_marginRight="60dp"
         android:background="@drawable/et_input_box"
+        android:digits="1234567890."
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:text="5"
+        android:inputType="numberDecimal"
         android:paddingLeft="10dp"
         android:paddingRight="15dp"
         android:singleLine="true"
+        android:text="5"
         android:textColor="#6c6c6c"
         android:textSize="13sp">
 
@@ -42,35 +44,36 @@
         android:textColor="@color/main_color" />
 
     <RadioGroup
+        android:id="@+id/rg_check_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dialog_edit_text"
         android:layout_alignRight="@+id/dialog_edit_text"
+        android:layout_below="@+id/dialog_edit_text"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rg_item_hour"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/rg_check_bg"
             android:button="@null"
             android:checked="true"
-            android:text="元/小时"
             android:gravity="center"
-            android:layout_marginRight="10dp"
+            android:text="元/小时"
             android:textColor="@drawable/rg_check_text_color" />
 
         <RadioButton
             android:id="@+id/rg_item_day"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/rg_check_bg"
             android:button="@null"
-            android:text="元/天"
             android:gravity="center"
-            android:layout_marginRight="10dp"
+            android:text="元/天"
             android:textColor="@drawable/rg_check_text_color" />
 
         <RadioButton
@@ -80,8 +83,8 @@
             android:layout_weight="1"
             android:background="@drawable/rg_check_bg"
             android:button="@null"
-            android:text="元/月"
             android:gravity="center"
+            android:text="元/月"
             android:textColor="@drawable/rg_check_text_color" />
     </RadioGroup>
 

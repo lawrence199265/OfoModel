@@ -29,4 +29,15 @@
 
     <string name="view_omit_style_content">%1$d人参与</string>
 
+    <string-array name="priceFormat">
+        <item><Data><![CDATA[<font color="#ff0000"><big>%1$s</big></font>&nbsp;元/小时]]></Data></item>
+        <item><Data><![CDATA[<font color="#ff0000"><big>%1$s</big></font>&nbsp;元/天]]></Data></item>
+        <item><Data><![CDATA[<font color="#ff0000"><big>%1$s</big></font>&nbsp;元/月]]></Data></item>
+    </string-array>
+
+    <string name="depositFormat">
+        <Data><![CDATA[<font color="#ff0000"><big>%1$s</big></font>&nbsp;元]]></Data>
+    </string>
+
+
 </resources>

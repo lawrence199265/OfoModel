@@ -1,10 +1,8 @@
 package com.zhuangbudong.ofo.adpter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +10,7 @@ import android.view.ViewGroup;
 
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.ImagePagerActivity;
-import com.zhuangbudong.ofo.model.ImageModel;
-import com.zhuangbudong.ofo.model.Item;
+import com.zhuangbudong.ofo.model.Issue;
 import com.zhuangbudong.ofo.widget.BannerViewPager;
 import com.zhuangbudong.ofo.widget.MultiImageView;
 
@@ -29,7 +26,7 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private List<Item> datas;
+    private List<Issue> datas;
     private Context context;
     private int[] imageList;
 
@@ -52,7 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     }
 
-    public void setDatas(List<Item> datas) {
+    public void setDatas(List<Issue> datas) {
         this.datas.clear();
         this.datas.addAll(datas);
         notifyDataSetChanged();
@@ -80,27 +77,30 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
                 break;
             case TYPE_CONTENT:
-                final List<ImageModel> photos = datas.get(position).getPhotos();
-                ((NewsAdapter.ViewHolder) holder).multiImageView.setList(photos);
-                final ArrayList<String> photoUrl = new ArrayList<String>();
-                for (ImageModel photo : photos) {
-                    photoUrl.add(photo.url);
-                }
+                final List<byte[]> photos = datas.get(position).getImage();
 
-
-                ((NewsAdapter.ViewHolder) holder).multiImageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-
-                        ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
-                        ActivityOptionsCompat optionsCompat = null;
-                        if (Build.VERSION.SDK_INT >= 16) {
-                            optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, ((NewsAdapter.ViewHolder) holder).multiImageView.getWidth() / 2, ((NewsAdapter.ViewHolder) holder).multiImageView.getHeight() / 2, 0, 0);
-                        }
-                        ImagePagerActivity.startImagePagerActivity(context, photoUrl, position, imageSize, transitionNames, optionsCompat.toBundle());
+                if (photos.size() != 0) {
+                    ((NewsAdapter.ViewHolder) holder).multiImageView.setList(photos);
+                    final ArrayList<byte[]> photoUrl = new ArrayList<byte[]>();
+                    for (byte[] photo : photos) {
+                        photoUrl.add(photo);
                     }
 
-                });
+
+                    ((NewsAdapter.ViewHolder) holder).multiImageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+
+                            ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
+                            ActivityOptionsCompat optionsCompat = null;
+                            if (Build.VERSION.SDK_INT >= 16) {
+                                optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, ((NewsAdapter.ViewHolder) holder).multiImageView.getWidth() / 2, ((NewsAdapter.ViewHolder) holder).multiImageView.getHeight() / 2, 0, 0);
+                            }
+                            ImagePagerActivity.startImagePagerActivity(context, photoUrl, position, imageSize, transitionNames, optionsCompat.toBundle());
+                        }
+
+                    });
+                }
                 break;
 
         }
@@ -125,7 +125,7 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas.size()+1;
     }
 
     public void setOnRecyclerItemListener(NewsAdapter.onRecyclerItemListener onRecyclerItemListener) {

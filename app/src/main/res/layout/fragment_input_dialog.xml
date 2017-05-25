@@ -19,6 +19,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:hint="点此输入"
+
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:singleLine="true"

@@ -13,14 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hwangjr.rxbus.RxBus;
 import com.lawrence.core.lib.core.mvp.BaseActivity;
 import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.inter.ISignInActivity;
+import com.zhuangbudong.ofo.event.LoginEvent;
 import com.zhuangbudong.ofo.model.User;
 import com.zhuangbudong.ofo.net.RetrofitNetApi;
 import com.zhuangbudong.ofo.presenter.SignInPresenter;
 import com.zhuangbudong.ofo.utils.DialogUtil;
+import com.zhuangbudong.ofo.utils.PrefsUtils;
 import com.zhuangbudong.ofo.widget.XEditText;
 
 import rx.Scheduler;
@@ -91,6 +94,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements ISi
         switch (v.getId()) {
             case R.id.btn_sign:
                 presenter.signIn(userEdit.getText().toString(), pwdEdit.getText().toString());
+//                startIntent();
                 break;
             case R.id.btn_register:
                 startActivity(new Intent(SignInActivity.this, RegisterActivity.class));
@@ -111,9 +115,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements ISi
 
     @Override
     public void startIntent() {
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_SIGN_OK, true);
-        setResult(RESULT_OK, intent);
+        PrefsUtils.savePrefBoolean(this, EXTRA_SIGN_OK, true);
+        RxBus.get().post(new LoginEvent(LoginEvent.LOGIN));
         finish();
     }
 }

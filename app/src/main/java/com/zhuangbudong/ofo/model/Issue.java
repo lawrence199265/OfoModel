@@ -11,22 +11,22 @@ import java.util.ArrayList;
 
 public class Issue implements Parcelable{
 
-    private String nickName;
+    private int id;
     private String title;
     private String type;
     private String memo;
-    private ArrayList<String> image;
+    private ArrayList<byte[]> image;
 
 
     public Issue() {
     }
 
-    public String getNickName() {
-        return nickName;
+    public int getId() {
+        return id;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -53,20 +53,19 @@ public class Issue implements Parcelable{
         this.memo = memo;
     }
 
-    public ArrayList<String> getImage() {
+    public ArrayList<byte[]> getImage() {
         return image;
     }
 
-    public void setImage(ArrayList<String> image) {
+    public void setImage(ArrayList<byte[]> image) {
         this.image = image;
     }
 
     protected Issue(Parcel in) {
-        nickName = in.readString();
+        id = in.readInt();
         title = in.readString();
         type = in.readString();
         memo = in.readString();
-        image = in.createStringArrayList();
     }
 
     public static final Creator<Issue> CREATOR = new Creator<Issue>() {
@@ -88,10 +87,9 @@ public class Issue implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nickName);
+        dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(type);
         dest.writeString(memo);
-        dest.writeStringList(image);
     }
 }

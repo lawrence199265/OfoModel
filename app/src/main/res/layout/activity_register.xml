@@ -79,7 +79,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/user_name"
+            android:id="@+id/register_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/tv_user_name"

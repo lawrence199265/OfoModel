@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by wangxu on 17/2/17.
  */
 
-public class User implements Parcelable {
+public class User implements Parcelable{
 
 
     private String userName;
