@@ -1,7 +1,6 @@
 package com.zhuangbudong.ofo.fragment;
 
 import com.lawrence.core.lib.core.mvp.IBaseFragmentView;
-import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.model.Issue;
 
 import java.util.List;

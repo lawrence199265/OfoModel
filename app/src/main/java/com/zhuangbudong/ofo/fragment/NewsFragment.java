@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.lawrence.core.lib.core.mvp.BaseFragment;
+import com.lawrence.core.lib.utils.utils.Logger;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.DetailActivity;
 import com.zhuangbudong.ofo.adpter.NewsAdapter;
@@ -144,13 +145,17 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements INewsFr
         newsAdapter.setOnRecyclerItemListener(new NewsAdapter.onRecyclerItemListener() {
             @Override
             public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), DetailActivity.class));
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                Logger.debug("点击选择:", position + "");
+                intent.putExtra("data", newsAdapter.getItemData(position - 2));
+
+                startActivity(intent);
             }
         });
     }
 
     @Override
     public void notifyUi(List<Issue> data) {
-        //newsAdapter.setDatas(data);
+        newsAdapter.setDatas(data);
     }
 }

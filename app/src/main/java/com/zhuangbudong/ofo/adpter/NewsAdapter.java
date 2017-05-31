@@ -1,20 +1,17 @@
 package com.zhuangbudong.ofo.adpter;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.zhuangbudong.ofo.R;
-import com.zhuangbudong.ofo.activity.ImagePagerActivity;
 import com.zhuangbudong.ofo.model.Issue;
 import com.zhuangbudong.ofo.widget.BannerViewPager;
 import com.zhuangbudong.ofo.widget.MultiImageView;
-
-import android.support.v7.widget.RecyclerView.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,11 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public void setTransitionNames(ArrayList<String> transitionNames) {
         this.transitionNames = transitionNames;
+    }
+
+
+    public Issue getItemData(int position) {
+        return datas.get(position);
     }
 
 
@@ -75,32 +77,37 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
         switch (itemViewType) {
             case TYPE_HEADER:
 
+
                 break;
             case TYPE_CONTENT:
-                final List<byte[]> photos = datas.get(position).getImage();
-
-                if (photos.size() != 0) {
-                    ((NewsAdapter.ViewHolder) holder).multiImageView.setList(photos);
-                    final ArrayList<byte[]> photoUrl = new ArrayList<byte[]>();
-                    for (byte[] photo : photos) {
-                        photoUrl.add(photo);
-                    }
-
-
-                    ((NewsAdapter.ViewHolder) holder).multiImageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-
-                            ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
-                            ActivityOptionsCompat optionsCompat = null;
-                            if (Build.VERSION.SDK_INT >= 16) {
-                                optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, ((NewsAdapter.ViewHolder) holder).multiImageView.getWidth() / 2, ((NewsAdapter.ViewHolder) holder).multiImageView.getHeight() / 2, 0, 0);
-                            }
-                            ImagePagerActivity.startImagePagerActivity(context, photoUrl, position, imageSize, transitionNames, optionsCompat.toBundle());
-                        }
-
-                    });
-                }
+                Issue issue = datas.get(position - 1);
+                ((ViewHolder) holder).title.setText(issue.getTitle());
+                ((ViewHolder) holder).detail.setText(issue.getDetail());
+                ((ViewHolder) holder).userName.setText(issue.getUserName());
+//                final List<byte[]> photos = datas.get(position).getImage();
+//
+//                if (photos.size() != 0) {
+//                    ((NewsAdapter.ViewHolder) holder).multiImageView.setList(photos);
+//                    final ArrayList<byte[]> photoUrl = new ArrayList<byte[]>();
+//                    for (byte[] photo : photos) {
+//                        photoUrl.add(photo);
+//                    }
+//
+//
+//                    ((NewsAdapter.ViewHolder) holder).multiImageView.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(View view, int position) {
+//
+//                            ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
+//                            ActivityOptionsCompat optionsCompat = null;
+//                            if (Build.VERSION.SDK_INT >= 16) {
+//                                optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, ((NewsAdapter.ViewHolder) holder).multiImageView.getWidth() / 2, ((NewsAdapter.ViewHolder) holder).multiImageView.getHeight() / 2, 0, 0);
+//                            }
+//                            ImagePagerActivity.startImagePagerActivity(context, photoUrl, position, imageSize, transitionNames, optionsCompat.toBundle());
+//                        }
+//
+//                    });
+//                }
                 break;
 
         }
@@ -125,7 +132,7 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return datas.size()+1;
+        return datas.size() + 1;
     }
 
     public void setOnRecyclerItemListener(NewsAdapter.onRecyclerItemListener onRecyclerItemListener) {
@@ -136,11 +143,17 @@ public class NewsAdapter extends RecyclerView.Adapter<ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         private MultiImageView multiImageView;
 
+        private TextView title;
+        private TextView detail;
+        private TextView userName;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             multiImageView = (MultiImageView) itemView.findViewById(R.id.main_iv_list);
-
+            title = (TextView) itemView.findViewById(R.id.main_tv_title);
+            detail = (TextView) itemView.findViewById(R.id.main_tv_info);
+            userName = (TextView) itemView.findViewById(R.id.item_user_name);
         }
     }
 

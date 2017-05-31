@@ -4,6 +4,7 @@ import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.model.Issue;
 import com.zhuangbudong.ofo.model.User;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/userDetail")
+    @POST("user/userdetail")
     Observable<HttpResult<JSONObject>> updateUserDeatil(@Body User user);
 
 
@@ -81,8 +82,8 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("issue/myIssue")
-    Observable<HttpResult<List<Issue>>> myIssue(@Field("userName") String userName, @Field("id") String id);
+    @POST("issue/myissue")
+    Observable<HttpResult<JSONArray>> myIssue(@Field("userName") String userName, @Field("id") String id);
 
     /**
      * 获取所有发布信息
@@ -90,7 +91,7 @@ public interface ApiService {
      * @return
      */
 //    @FormUrlEncoded
-    @GET("issue/allIssue")
+    @GET("issue/allissue")
     Observable<HttpResult<List<Issue>>> allIssue();
 
 

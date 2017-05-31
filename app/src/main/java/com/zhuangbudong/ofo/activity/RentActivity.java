@@ -3,9 +3,9 @@ package com.zhuangbudong.ofo.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -42,7 +42,6 @@ import com.zhuangbudong.ofo.widget.InputDialogFragment;
 import com.zhuangbudong.ofo.widget.InputPriceDialogFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RentActivity extends BaseActivity<RentPresenter> implements IRentActivity, DynamicPickerAdapter.onAddImageListener, DynamicPickerAdapter.OnItemClickListener, View.OnClickListener {
     private RecyclerView rlImgPicker;
@@ -266,10 +265,10 @@ public class RentActivity extends BaseActivity<RentPresenter> implements IRentAc
                 }
 
                 Issue issue = new Issue();
-                issue.setId(OfoApplication.getInstance().userId);
+                issue.setUserId(OfoApplication.getInstance().userId);
                 issue.setTitle(etTitle.getText().toString());
-                issue.setMemo(etBody.getText().toString());
-                issue.setImage(images);
+                issue.setDetail(etBody.getText().toString());
+//                issue.setImage(images);
                 presenter.submitRentInfo(issue);
                 break;
 

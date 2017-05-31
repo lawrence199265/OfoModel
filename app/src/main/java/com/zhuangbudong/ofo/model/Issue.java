@@ -3,30 +3,51 @@ package com.zhuangbudong.ofo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
 /**
  * Created by wangxu on 17/2/17.
  */
 
-public class Issue implements Parcelable{
+public class Issue implements Parcelable {
 
-    private int id;
+    private int userId;
     private String title;
     private String type;
-    private String memo;
-    private ArrayList<byte[]> image;
-
+    private String detail;
+    private String phone;
+    private String userName;
+    private String[] image;
 
     public Issue() {
     }
 
-    public int getId() {
-        return id;
+    protected Issue(Parcel in) {
+        userId = in.readInt();
+        title = in.readString();
+        type = in.readString();
+        detail = in.readString();
+        phone = in.readString();
+        userName = in.readString();
+        image = in.createStringArray();
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static final Creator<Issue> CREATOR = new Creator<Issue>() {
+        @Override
+        public Issue createFromParcel(Parcel in) {
+            return new Issue(in);
+        }
+
+        @Override
+        public Issue[] newArray(int size) {
+            return new Issue[size];
+        }
+    };
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -45,40 +66,37 @@ public class Issue implements Parcelable{
         this.type = type;
     }
 
-    public String getMemo() {
-        return memo;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setMemo(String memo) {
-        this.memo = memo;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
-    public ArrayList<byte[]> getImage() {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String[] getImage() {
         return image;
     }
 
-    public void setImage(ArrayList<byte[]> image) {
+    public void setImage(String[] image) {
         this.image = image;
     }
 
-    protected Issue(Parcel in) {
-        id = in.readInt();
-        title = in.readString();
-        type = in.readString();
-        memo = in.readString();
+    public String getUserName() {
+        return userName;
     }
 
-    public static final Creator<Issue> CREATOR = new Creator<Issue>() {
-        @Override
-        public Issue createFromParcel(Parcel in) {
-            return new Issue(in);
-        }
-
-        @Override
-        public Issue[] newArray(int size) {
-            return new Issue[size];
-        }
-    };
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     @Override
     public int describeContents() {
@@ -87,9 +105,12 @@ public class Issue implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeInt(userId);
         dest.writeString(title);
         dest.writeString(type);
-        dest.writeString(memo);
+        dest.writeString(detail);
+        dest.writeString(phone);
+        dest.writeString(userName);
+        dest.writeStringArray(image);
     }
 }

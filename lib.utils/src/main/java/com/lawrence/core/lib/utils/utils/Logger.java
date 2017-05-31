@@ -18,7 +18,7 @@ public class Logger {
 
     private static final String END = "╚═════════════════════════════════════════════════" +
             "══════════════════════════════════════════════════";
-    private static volatile boolean DEBUG = false;
+    private static volatile boolean DEBUG = true;
 
     public Logger() {
     }

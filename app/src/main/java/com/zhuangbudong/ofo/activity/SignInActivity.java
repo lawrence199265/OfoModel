@@ -1,12 +1,8 @@
 package com.zhuangbudong.ofo.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,22 +11,13 @@ import android.widget.Toast;
 
 import com.hwangjr.rxbus.RxBus;
 import com.lawrence.core.lib.core.mvp.BaseActivity;
-import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.inter.ISignInActivity;
 import com.zhuangbudong.ofo.event.LoginEvent;
-import com.zhuangbudong.ofo.model.User;
-import com.zhuangbudong.ofo.net.RetrofitNetApi;
 import com.zhuangbudong.ofo.presenter.SignInPresenter;
 import com.zhuangbudong.ofo.utils.DialogUtil;
 import com.zhuangbudong.ofo.utils.PrefsUtils;
 import com.zhuangbudong.ofo.widget.XEditText;
-
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements ISignInActivity, View.OnClickListener {
 

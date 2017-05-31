@@ -2,17 +2,14 @@ package com.zhuangbudong.ofo.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.lawrence.core.lib.core.net.ApiException;
 import com.lawrence.core.lib.core.net.HttpResult;
 import com.zhuangbudong.ofo.activity.inter.ISignInActivity;
 import com.zhuangbudong.ofo.application.OfoApplication;
 import com.zhuangbudong.ofo.model.User;
-import com.zhuangbudong.ofo.model.UserRepository;
 import com.zhuangbudong.ofo.net.SchedulersTransformer;
 import com.zhuangbudong.ofo.utils.AppUtil;
-
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
