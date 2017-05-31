@@ -1,19 +1,18 @@
 package com.zhuangbudong.ofo.presenter;
 
+
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.lawrence.core.lib.core.net.HttpResult;
+import com.lawrence.core.lib.utils.utils.Logger;
 import com.zhuangbudong.ofo.activity.inter.ISignInActivity;
 import com.zhuangbudong.ofo.model.User;
-import com.zhuangbudong.ofo.net.SchedulersTransformer;
 import com.zhuangbudong.ofo.utils.AppUtil;
 
-import io.reactivex.Observer;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import rx.Subscriber;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by wangxu on 17/2/9.
@@ -25,7 +24,7 @@ public class SignInPresenter extends OfoBasePresenter<ISignInActivity> {
         super(iView, context);
     }
 
-    public void signIn(String userName, String pwd) {
+    public void signIn(final String userName, String pwd) {
         if (!AppUtil.isNetWorkConnected(context)) {
             iView.showToast("网络连接不可用，请检查");
         }
@@ -38,34 +37,29 @@ public class SignInPresenter extends OfoBasePresenter<ISignInActivity> {
             iView.showToast("密码不能为空!");
             return;
         }
-        iView.showLoading();
+//        iView.showLoading();
+
+
         apiService.login(userName, pwd)
-                .compose(new SchedulersTransformer<HttpResult<User>>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HttpResult<User>>() {
 
-                               @Override
-                               public void onSubscribe(Disposable d) {
-                               }
+                    @Override
+                    public void onCompleted() {
 
-                               @Override
-                               public void onNext(HttpResult<User> userHttpResult) {
-                                   iView.startIntent();
-                               }
+                    }
 
-                               @Override
-                               public void onError(Throwable e) {
-                                   iView.showToast(e.toString());
-                                   iView.dismissLoading();
-                               }
+                    @Override
+                    public void onError(Throwable e) {
+                        Logger.error(TAG, e.getMessage());
+                    }
 
-                               @Override
-                               public void onComplete() {
-                                   iView.dismissLoading();
-                               }
-                           }
-                )
-
-        ;
+                    @Override
+                    public void onNext(HttpResult<User> userHttpResult) {
+                        Logger.debug(TAG, userHttpResult.getData().toString());
+                    }
+                });
 
     }
 }

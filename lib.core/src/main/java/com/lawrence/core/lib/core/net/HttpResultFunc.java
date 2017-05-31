@@ -10,7 +10,7 @@ import rx.functions.Func1;
  *            create by wangxu
  */
 
-class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
+public class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
 
     @Override
     public T call(HttpResult<T> tHttpResult) {

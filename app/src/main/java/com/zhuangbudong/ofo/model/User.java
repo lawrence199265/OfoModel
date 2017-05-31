@@ -1,13 +1,10 @@
 package com.zhuangbudong.ofo.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by wangxu on 17/2/17.
  */
 
-public class User implements Parcelable {
+public class User {
 
 
     private String userName;
@@ -20,6 +17,23 @@ public class User implements Parcelable {
 
 
     public User() {
+    }
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNickName() {
@@ -62,53 +76,16 @@ public class User implements Parcelable {
         this.phone = phone;
     }
 
-    protected User(Parcel in) {
-        nickName = in.readString();
-        id = in.readString();
-        address = in.readString();
-        email = in.readString();
-        phone = in.readString();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nickName);
-        dest.writeString(id);
-        dest.writeString(address);
-        dest.writeString(email);
-        dest.writeString(phone);
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", id='" + id + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

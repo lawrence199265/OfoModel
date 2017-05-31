@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import rx.functions.Func1;
+//import rx.functions.Func1;
 
 /**
  * Created by wangxu on 16/12/16.

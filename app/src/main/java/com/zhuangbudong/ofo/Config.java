@@ -7,5 +7,5 @@ package com.zhuangbudong.ofo;
 public class Config {
 
 
-    public static final String BASE_URL = "http://192.168.1.63:8080/ofomodel/user/";
+    public static final String BASE_URL = "http://10.116.212.20:8080/ofomodel/user/";
 }
