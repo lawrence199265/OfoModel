@@ -3,9 +3,8 @@ package com.zhuangbudong.ofo.activity.inter;
 import com.lawrence.core.lib.core.mvp.IBaseView;
 
 /**
- * Created by wangxu on 17/2/8.
+ * Created by xxx on 17/5/21.
  */
-public interface ILoadingActivity extends IBaseView {
 
-    void success();
+public interface IRentActivity extends IBaseView {
 }

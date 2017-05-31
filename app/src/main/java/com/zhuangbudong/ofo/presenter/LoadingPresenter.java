@@ -12,6 +12,7 @@ import com.zhuangbudong.ofo.activity.inter.ILoadingActivity;
 
 public class LoadingPresenter extends OfoBasePresenter<ILoadingActivity> {
 
+
     public LoadingPresenter(ILoadingActivity iView, Context context) {
         super(iView, context);
     }

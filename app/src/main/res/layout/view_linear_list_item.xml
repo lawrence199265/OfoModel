@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:id="@+id/mLL_Item"
-            style="@style/style_list_item_text"
+            style="@style/style_list_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -77,8 +77,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:maxWidth="250dp"
-                    />
+                    android:maxWidth="250dp" />
 
                 <TextView
                     android:id="@+id/mTv_LeftText2"
@@ -177,7 +176,7 @@
                     style="@style/style_list_item_text"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="2dp"
-                    android:layout_toLeftOf="@id/mTv_MessageNumber"
+                    android:layout_toRightOf="@id/mTv_LeftText2"
                     android:ellipsize="end"
                     android:maxEms="8"
                     android:maxLines="1"

@@ -1,39 +1,41 @@
 package com.zhuangbudong.ofo.activity;
 
-import android.animation.LayoutTransition;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.lawrence.core.lib.core.mvp.BaseActivity;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.inter.IRegisterActivity;
 import com.zhuangbudong.ofo.presenter.RegisterPresenter;
 import com.zhuangbudong.ofo.widget.NoLineClickSpan;
-import com.zhuangbudong.ofo.widget.SwipeCaptchaView;
-import com.zhuangbudong.ofo.widget.SwipeCaptchaView.OnCaptchaMatchCallback;
 
-public class RegisterActivity extends BaseActivity<RegisterPresenter> implements IRegisterActivity, SeekBar.OnSeekBarChangeListener, OnCaptchaMatchCallback {
-    private SwipeCaptchaView captchaView;
-    private SeekBar seekBar;
+
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
+
+public class RegisterActivity extends BaseActivity<RegisterPresenter> implements IRegisterActivity, View.OnClickListener {
     private RelativeLayout rlContainer, rlMatch;
     private Toolbar tlBar;
     private TextView tvJumpToLogin;
+
+    private EditText etPwd, etPwdAgain, etUserName;
+
+    private Button btnRegister;
+
 
     @Override
     protected void initPresenter() {
@@ -47,22 +49,49 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void initView() {
-        captchaView = (SwipeCaptchaView) findViewById(R.id.register_captcha_view);
-        seekBar = (SeekBar) findViewById(R.id.register_drag_bar);
         rlContainer = (RelativeLayout) findViewById(R.id.register_rl_container);
         rlMatch = (RelativeLayout) findViewById(R.id.rl_match_layout);
         tlBar = (Toolbar) findViewById(R.id.register_tl_bar);
-        captchaView.setOnCaptchaMatchCallback(this);
-        seekBar.setOnSeekBarChangeListener(this);
+        btnRegister = (Button) findViewById(R.id.btn_register);
+        btnRegister.setOnClickListener(this);
         setSupportActionBar(tlBar);
         getSupportActionBar().setTitle(R.string.label_register);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tvJumpToLogin = (TextView) findViewById(R.id.register_jump_login);
+        etPwd = (EditText) findViewById(R.id.et_password);
+        etPwdAgain = (EditText) findViewById(R.id.et_password_again);
+        etUserName = (EditText) findViewById(R.id.register_user_name);
 
         handleJumpText();
 
+        handlePassword();
 
+
+    }
+
+    private void handlePassword() {
+        Observable<CharSequence> pwdObservable = RxTextView.textChanges(etPwd);
+        Observable<CharSequence> pwdAgainObservable = RxTextView.textChanges(etPwdAgain);
+        Observable.combineLatest(pwdObservable, pwdAgainObservable, new BiFunction<CharSequence, CharSequence, Boolean>() {
+
+            @Override
+            public Boolean apply(@NonNull CharSequence pwd, @NonNull CharSequence newPwd) throws Exception {
+                if (newPwd.toString().trim().length() == 0) {
+                    return true;
+                }
+                return pwd.toString().trim().equals(newPwd.toString().trim());
+            }
+        }).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                if (!aBoolean) {
+                    etPwdAgain.setError("两次密码不一致");
+                } else {
+                    etPwdAgain.setError(null);
+                }
+            }
+        });
     }
 
     private void handleJumpText() {
@@ -84,7 +113,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void showToast(String msg) {
-
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -92,33 +121,16 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        captchaView.setCurrentSwipeValue(progress);
-    }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        seekBar.setMax(captchaView.getMaxSwipeValue());
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        captchaView.matchCaptcha();
-    }
-
-    @Override
-    public void matchSuccess(SwipeCaptchaView swipeCaptchaView) {
-        Toast.makeText(RegisterActivity.this, "恭喜你啊,验证成功", Toast.LENGTH_SHORT).show();
-        seekBar.setEnabled(false);
-        rlMatch.setVisibility(View.GONE);
-        rlContainer.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void matchFailed(SwipeCaptchaView swipeCaptchaView) {
-        Toast.makeText(RegisterActivity.this, "你有80%的可能是机器人，现在走还来得及", Toast.LENGTH_SHORT).show();
-        swipeCaptchaView.resetCaptcha();
-        seekBar.setProgress(0);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_register:
+                presenter.registerUser(etUserName.getText().toString(), etPwd.getText().toString());
+                showToast("注册成功");
+                startActivity(new Intent(this, SignInActivity.class));
+                finish();
+                break;
+        }
     }
 }

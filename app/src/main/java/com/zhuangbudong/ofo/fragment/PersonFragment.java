@@ -1,57 +1,46 @@
 package com.zhuangbudong.ofo.fragment;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
+import com.lawrence.core.lib.core.mvp.BaseFragment;
 import com.zhuangbudong.ofo.R;
-import com.zhuangbudong.ofo.widget.XEditText;
+import com.zhuangbudong.ofo.activity.Main2Activity;
+import com.zhuangbudong.ofo.activity.PersonInfoActivity;
+import com.zhuangbudong.ofo.activity.inter.IMainActivity;
+import com.zhuangbudong.ofo.application.OfoApplication;
+import com.zhuangbudong.ofo.event.LoginEvent;
+import com.zhuangbudong.ofo.fragment.inter.IPersonFragment;
+import com.zhuangbudong.ofo.model.User;
+import com.zhuangbudong.ofo.presenter.PersonPresenter;
+import com.zhuangbudong.ofo.utils.PrefsUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SignFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SignFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PersonFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private XEditText pwdEdit;
-    private EditText userEdit;
+import static com.zhuangbudong.ofo.activity.SignInActivity.EXTRA_SIGN_OK;
 
-    // TODO: Rename and change types of parameters
 
+public class PersonFragment extends BaseFragment<PersonPresenter> implements View.OnClickListener, IPersonFragment {
+
+    private Button btnQuit;
+
+    public static final int REQUEST_QUIT = -2;
+
+    private FrameLayout flHead;
+
+
+    private TextView tvUserName;
 
     public PersonFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SignFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-//    public static SignFragment newInstance(String param1, String param2) {
-//        SignFragment fragment = new SignFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
+
     public static PersonFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -64,15 +53,36 @@ public class PersonFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.updateUser();
+    }
+
+    @Override
+    protected void destroyViewAndThings() {
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View inflate = inflater.inflate(R.layout.fragment_sign, container, false);
-        return inflate;
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_person;
+    }
+
+
+    @Override
+    public void showToast(String msg) {
+
+    }
+
+    public void initView(View view) {
+        btnQuit = (Button) view.findViewById(R.id.fg_btn_quit);
+        flHead = (FrameLayout) view.findViewById(R.id.personal_fl_head);
+        tvUserName = (TextView) view.findViewById(R.id.my_user_name);
+        btnQuit.setOnClickListener(this);
+        flHead.setOnClickListener(this);
     }
 
 
@@ -83,19 +93,41 @@ public class PersonFragment extends Fragment {
     }
 
     @Override
+    protected void bindData() {
+
+    }
+
+    @Override
+    protected void initPresenter() {
+        presenter = new PersonPresenter(this, getContext());
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fg_btn_quit:
+                PrefsUtils.savePrefBoolean(getContext(), EXTRA_SIGN_OK, false);
+                RxBus.get().post(new LoginEvent(LoginEvent.LOGOUT));
+                OfoApplication.getInstance().userId = -1;
+                Intent intent = new Intent(getContext(), Main2Activity.class);
+                startActivity(intent);
+                break;
+            case R.id.personal_fl_head:
+                Intent personIntent = new Intent(getContext(), PersonInfoActivity.class);
+                startActivity(personIntent);
+                break;
+        }
+    }
+
+
+    @Override
+    public void updateUser(User user) {
+        tvUserName.setText(user.getUserName());
+    }
 }

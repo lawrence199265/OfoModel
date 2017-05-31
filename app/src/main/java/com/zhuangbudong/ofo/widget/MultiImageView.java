@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.model.ImageModel;
+import com.zhuangbudong.ofo.utils.BitmapUtil;
 import com.zhuangbudong.ofo.utils.DensityUtils;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class MultiImageView extends LinearLayout {
     public static int MAX_WIDTH = 0;
 
     // 照片的Url列表
-    private List<ImageModel> imagesList;
+    private List<byte[]> imagesList;
 
     /**
      * 长度 单位为Pixel
@@ -54,7 +55,7 @@ public class MultiImageView extends LinearLayout {
         super(context, attrs);
     }
 
-    public void setList(List<ImageModel> lists) throws IllegalArgumentException {
+    public void setList(List<byte[]> lists) throws IllegalArgumentException {
         if (lists == null) {
             throw new IllegalArgumentException("imageList is null...");
         }
@@ -142,16 +143,16 @@ public class MultiImageView extends LinearLayout {
 
 
     private ImageView createImageView(int position) {
-        ImageModel photoInfo = imagesList.get(position);
+        byte[] photoInfo = imagesList.get(position);
         ImageView imageView = new ColorFilterImageView(getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(position % MAX_PER_ROW_COUNT == 0 ? moreParaColumnFirst : morePara);
 
 
-        imageView.setId(photoInfo.url.hashCode());
+        imageView.setId(photoInfo.hashCode());
         imageView.setOnClickListener(new MultiImageView.ImageOnClickListener(position));
         imageView.setBackgroundColor(getResources().getColor(R.color.im_font_color_text_hint));
-        Glide.with(getContext()).load(photoInfo.url).diskCacheStrategy(DiskCacheStrategy.SOURCE)
+        Glide.with(getContext()).load(photoInfo).diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.drawable.empty_netexception)
                 .error(R.drawable.a)
                 .into(imageView);

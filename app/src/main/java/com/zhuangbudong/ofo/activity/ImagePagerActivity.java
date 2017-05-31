@@ -29,6 +29,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.zhuangbudong.ofo.R;
+import com.zhuangbudong.ofo.utils.BitmapUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class ImagePagerActivity extends AppCompatActivity {
     public static final String PARAMS_TRANSITIONNAMES = "transition_names";
     private ViewPager vpImage;
     private int startPos;
-    private ArrayList<String> imgUrls;
+    private ArrayList<byte[]> imgUrls;
     private ImageSize imageSize;
 
     private List<String> transitionNames = new ArrayList<>();
@@ -71,7 +72,7 @@ public class ImagePagerActivity extends AppCompatActivity {
 
     private void getIntentData() {
         startPos = getIntent().getIntExtra(INTENT_POSITION, 0);
-        imgUrls = getIntent().getStringArrayListExtra(INTENT_IMGURLS);
+//        imgUrls = getIntent().gete(INTENT_IMGURLS);
         imageSize = (ImageSize) getIntent().getSerializableExtra(INTENT_IMAGESIZE);
 
     }
@@ -88,9 +89,9 @@ public class ImagePagerActivity extends AppCompatActivity {
     }
 
 
-    public static void startImagePagerActivity(Context context, List<String> imgUrls, int position, ImageSize imageSize, ArrayList<String> transitionNames, Bundle bundle) {
+    public static void startImagePagerActivity(Context context, List<byte[]> imgUrls, int position, ImageSize imageSize, ArrayList<String> transitionNames, Bundle bundle) {
         Intent intent = new Intent(context, ImagePagerActivity.class);
-        intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<String>(imgUrls));
+        intent.putExtra(INTENT_IMGURLS, new ArrayList<byte[]>(imgUrls));
         intent.putExtra(INTENT_POSITION, position);
         intent.putExtra(INTENT_IMAGESIZE, imageSize);
         intent.putExtra(PARAMS_TRANSITIONNAMES, transitionNames);
@@ -103,13 +104,13 @@ public class ImagePagerActivity extends AppCompatActivity {
 
     private class ImageAdapter extends PagerAdapter {
 
-        private List<String> datas = new ArrayList<String>();
+        private List<byte[]> datas = new ArrayList<byte[]>();
         private LayoutInflater inflater;
         private Context context;
         private ImageSize imageSize;
         private ImageView smallImageView = null;
 
-        public void setDatas(List<String> datas) {
+        public void setDatas(List<byte[]> datas) {
             if (datas != null)
                 this.datas = datas;
         }
@@ -155,10 +156,10 @@ public class ImagePagerActivity extends AppCompatActivity {
                 loading.setLayoutParams(loadingLayoutParams);
                 ((FrameLayout) view).addView(loading);
 
-                final String imgurl = datas.get(position);
+//                final String imgurl = datas.get(position);
 
                 Glide.with(context)
-                        .load(imgurl)
+                        .load(BitmapUtil.base64ToBitmap("123"))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存多个尺寸
                         .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
                         .error(R.drawable.empty_netexception)

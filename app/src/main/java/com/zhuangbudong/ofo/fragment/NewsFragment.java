@@ -5,34 +5,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.lawrence.core.lib.core.mvp.BaseFragment;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.activity.DetailActivity;
-import com.zhuangbudong.ofo.activity.PersonInfoActivity;
-import com.zhuangbudong.ofo.adpter.BannerAdapter;
 import com.zhuangbudong.ofo.adpter.NewsAdapter;
-import com.zhuangbudong.ofo.model.Item;
-import com.zhuangbudong.ofo.utils.DatasUtil;
-import com.zhuangbudong.ofo.utils.DensityUtils;
+import com.zhuangbudong.ofo.model.Issue;
+import com.zhuangbudong.ofo.presenter.NewsPresenter;
 import com.zhuangbudong.ofo.widget.BannerViewPager;
-import com.zhuangbudong.ofo.widget.CustomDividerDecoration;
-import com.zhuangbudong.ofo.widget.listener.RecyclerItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class NewsFragment extends Fragment {
+public class NewsFragment extends BaseFragment<NewsPresenter> implements INewsFragment {
 
     private int[] imageList = new int[]{R.drawable.ic_img04, R.drawable.a, R.drawable.c};
     /**
@@ -42,9 +34,10 @@ public class NewsFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private BannerViewPager loopViewPager;
     private XRecyclerView rlList;
-    private List<Item> circleDatas;
+    private List<Issue> circleDatas = new ArrayList<>();
     private int refreshTime = 0;
     private int times = 0;
+    private NewsAdapter newsAdapter;
 
 
     public NewsFragment() {
@@ -66,30 +59,48 @@ public class NewsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
 
 
-    }
-
-    private void initData() {
-        circleDatas = DatasUtil.createCircleDatas();
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
-        rlList = (XRecyclerView) rootView.findViewById(R.id.news_rl_list);
+    protected void bindData() {
+        presenter.updateListView();
+    }
+
+    @Override
+    protected void initPresenter() {
+        presenter = new NewsPresenter(this, getContext());
+    }
+
+    @Override
+    protected void destroyViewAndThings() {
+
+    }
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_main2;
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void initView(View view) {
+        rlList = (XRecyclerView) view.findViewById(R.id.news_rl_list);
         rlList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.divider);
         rlList.addItemDecoration(rlList.new DividerItemDecoration(dividerDrawable));
         rlList.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         rlList.setLoadingMoreEnabled(true);
         rlList.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
-        final NewsAdapter newsAdapter = new NewsAdapter(getContext(), imageList);
-        newsAdapter.setDatas(circleDatas);
+        newsAdapter = new NewsAdapter(getContext(), imageList);
         rlList.setAdapter(newsAdapter);
+        newsAdapter.setDatas(circleDatas);
 
         rlList.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -136,8 +147,10 @@ public class NewsFragment extends Fragment {
                 startActivity(new Intent(getActivity(), DetailActivity.class));
             }
         });
-
-        return rootView;
     }
 
+    @Override
+    public void notifyUi(List<Issue> data) {
+        //newsAdapter.setDatas(data);
+    }
 }

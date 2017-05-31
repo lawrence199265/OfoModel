@@ -42,7 +42,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/rent_tv_text_length"
+                android:id="@+id/swap_tv_text_length"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -53,7 +53,7 @@
                 android:id="@+id/rl_iv_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rent_tv_text_length"
+                android:layout_below="@+id/swap_tv_text_length"
                 android:layout_marginTop="5dp"
                 android:overScrollMode="never" />
         </RelativeLayout>
@@ -72,7 +72,7 @@
                 android:text="我能提供" />
 
             <TextView
-                android:id="@+id/rent_tv_provide"
+                android:id="@+id/swap_tv_provide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -96,7 +96,7 @@
                 android:text="我的需要" />
 
             <TextView
-                android:id="@+id/rent_tv_demand"
+                android:id="@+id/swap_tv_demand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

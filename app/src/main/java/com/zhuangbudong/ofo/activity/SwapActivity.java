@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -23,6 +26,8 @@ import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.nanchen.compresshelper.CompressHelper;
 import com.zhuangbudong.ofo.R;
 import com.zhuangbudong.ofo.adpter.DynamicPickerAdapter;
+import com.zhuangbudong.ofo.event.BusAction;
+import com.zhuangbudong.ofo.utils.CalculateTextLengthUtil;
 import com.zhuangbudong.ofo.widget.FullyGridLayoutManager;
 import com.zhuangbudong.ofo.widget.InputDialogFragment;
 
@@ -43,13 +48,23 @@ public class SwapActivity extends AppCompatActivity implements DynamicPickerAdap
     public static final int REQUEST_CODE_PREVIEW = 101;
     private int maxImageCount = 3;
     private InputDialogFragment inputDialogFragment;
+    private String provideString = "";
+    private String demandString = "";
+    private CalculateTextLengthUtil calculateTextLengthUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swap);
+        RxBus.get().register(this);
         initCompressHelper();
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.get().unregister(this);
     }
 
     private void initView() {
@@ -65,11 +80,20 @@ public class SwapActivity extends AppCompatActivity implements DynamicPickerAdap
         adapter.setOnItemClickListener(this);
         rlImgPicker.setHasFixedSize(true);
         rlImgPicker.setAdapter(adapter);
-
-        rlProvide= (RelativeLayout) findViewById(R.id.swap_rl_provide);
-        rlDemand= (RelativeLayout) findViewById(R.id.swap_rl_demand);
+        rlProvide = (RelativeLayout) findViewById(R.id.swap_rl_provide);
+        rlDemand = (RelativeLayout) findViewById(R.id.swap_rl_demand);
         rlProvide.setOnClickListener(this);
         rlDemand.setOnClickListener(this);
+
+        tvProvide = (TextView) findViewById(R.id.swap_tv_provide);
+        tvDemand = (TextView) findViewById(R.id.swap_tv_demand);
+
+
+        //更新录入的字数
+        calculateTextLengthUtil = new CalculateTextLengthUtil();
+        tvBodyLength = (TextView) findViewById(R.id.swap_tv_text_length);
+        etBody = (EditText) findViewById(R.id.swap_et_description);
+        calculateTextLengthUtil.updateTextCount(tvBodyLength, 99, etBody);
     }
 
     private void initCompressHelper() {
@@ -142,17 +166,30 @@ public class SwapActivity extends AppCompatActivity implements DynamicPickerAdap
         startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
     }
 
+    @Subscribe(tags = @Tag(BusAction.TAG_INPUT_PROVIDE))
+    public void updateProvide(String provideString) {
+        this.provideString = provideString;
+        tvProvide.setText(provideString);
+    }
+
+    @Subscribe(tags = @Tag(BusAction.TAG_INPUT_DEMAND))
+    public void updateDemand(String demandString) {
+        this.demandString = demandString;
+        tvDemand.setText(demandString);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.swap_rl_provide:
-                inputDialogFragment = InputDialogFragment.newInstance(InputDialogFragment.TYPE_CUSTOM);
+                inputDialogFragment = InputDialogFragment.newInstance(InputDialogFragment.TYPE_PROVIDE, provideString);
                 inputDialogFragment.show(getSupportFragmentManager(), "InputDialogFragment");
                 break;
             case R.id.swap_rl_demand:
-                inputDialogFragment = InputDialogFragment.newInstance(InputDialogFragment.TYPE_CUSTOM);
+                inputDialogFragment = InputDialogFragment.newInstance(InputDialogFragment.TYPE_DEMAND, demandString);
                 inputDialogFragment.show(getSupportFragmentManager(), "InputDialogFragment");
                 break;
         }
+
     }
 }
